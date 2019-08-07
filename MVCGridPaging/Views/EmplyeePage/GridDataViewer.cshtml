@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MVCGridPaging.Models.GridData>
+    @using GridMvc.Html
+@{
+    ViewBag.Title = "GridDataViewer";
+}
+
+<h2>GridDataViewer</h2>
+<h2> This view is diaplaying Emplyee data with paging Enabled</h2>
+<div >
+    @Html.Grid(Model).Columns(col => {
+    col.Add(c => c.Name).Filterable(true);
+    col.Add(c => c.Department).Filterable(true);
+    col.Add(c => c.JoiningDate);
+    col.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(ren => Html.ActionLink("AddtoExcel", "AddtoExcel", new { id = ren.EmpID }));
+
+
+
+    }).WithPaging(5).Sortable(true);
+</div>
+
